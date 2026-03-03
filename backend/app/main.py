@@ -7,6 +7,11 @@ from app.auth import verify_api_key
 from app.routers import interactions, items, learners
 from app.settings import settings
 
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 app = FastAPI(
     title=settings.app_name,
     debug=settings.debug,
@@ -16,7 +21,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
